@@ -25,6 +25,7 @@
   --palette-green-soft: rgba(199, 237, 192, 0.45);
   --palette-green-text: #3f7a3f;
   --palette-cream: #edddc0;
+  --palette-cream-deep: #e0c99a;
 }
 
 body {
@@ -45,4 +46,13 @@ html {
 
 ::-webkit-scrollbar {
   display: none; /* Chrome, Safari, new Edge */
+}
+
+@keyframes wave-scroll {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0%);
+  }
 }

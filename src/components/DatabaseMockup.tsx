@@ -11,6 +11,12 @@ interface TableDef {
   rows: (string | number)[][];
 }
 
+const TABLE_DOT_COLORS: Record<string, string> = {
+  users: "var(--palette-pink-deep)",
+  orders: "var(--palette-blue-deep)",
+  payments: "var(--palette-green-deep)",
+};
+
 const TABLES: TableDef[] = [
   {
     key: "users",
@@ -63,12 +69,16 @@ export default function DatabaseMockup() {
               <button
                 key={tb.key}
                 onClick={() => setSelectedKey(tb.key)}
-                className={`text-left px-2 py-1 rounded transition-colors ${
+                className={`flex items-center gap-2 text-left px-2 py-1 rounded transition-colors ${
                   active
                     ? "bg-[var(--accent)] text-[var(--accent-contrast)] shadow-[0_0_8px_var(--glow)]"
                     : "text-[var(--muted)] hover:text-[var(--foreground)]"
                 }`}
               >
+                <span
+                  className="w-1.5 h-1.5 rounded-full shrink-0"
+                  style={{ backgroundColor: active ? "currentColor" : TABLE_DOT_COLORS[tb.key] }}
+                />
                 {tb.name}
               </button>
             );

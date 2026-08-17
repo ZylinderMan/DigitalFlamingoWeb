@@ -15,6 +15,14 @@ const MID_CENTER = CENTERS[1];
 const CORNER_RADIUS = 16;
 const TRUNK_INSET = 32;
 
+// Each tab gets its own palette color instead of the shared accent pink —
+// this is the experiment: borders/active-states drawn from blue/green/cream.
+const TAB_COLORS: Record<ShowcaseTab, { solid: string; glow: string }> = {
+  uiux: { solid: "var(--palette-blue-deep)", glow: "rgba(168, 196, 226, 0.6)" },
+  database: { solid: "var(--palette-green-deep)", glow: "rgba(168, 221, 160, 0.6)" },
+  payment: { solid: "var(--palette-cream-deep)", glow: "rgba(224, 201, 154, 0.6)" },
+};
+
 type Point = { x: number; y: number };
 
 function dist(a: Point, b: Point) {
@@ -70,8 +78,6 @@ export default function ShowcaseButtons({
   const selectedIndex = TABS.indexOf(selected);
   const trunkX = Math.max(connectorWidth - TRUNK_INSET, 40);
 
-  // Shared by the backdrop AND the active path — this is what makes
-  // every corner use the identical curve, fixing the mismatch.
   function pathFor(index: number): string {
     return roundedPath(
       [
@@ -103,12 +109,11 @@ export default function ShowcaseButtons({
 
           <motion.path
             fill="none"
-            stroke="var(--accent)"
             strokeWidth={1.5}
             strokeLinecap="round"
-            animate={{ d: activePath }}
+            animate={{ d: activePath, stroke: TAB_COLORS[selected].solid }}
             transition={{ type: "spring", duration: 0.5 }}
-            style={{ filter: "drop-shadow(0 0 4px var(--glow))" }}
+            style={{ filter: `drop-shadow(0 0 4px ${TAB_COLORS[selected].glow})` }}
           />
         </svg>
       </div>
@@ -120,10 +125,19 @@ export default function ShowcaseButtons({
             <button
               key={tab}
               onClick={() => onSelect(tab)}
-              style={{ height: BUTTON_HEIGHT }}
+              style={{
+                height: BUTTON_HEIGHT,
+                ...(active
+                  ? {
+                      borderColor: TAB_COLORS[tab].solid,
+                      backgroundColor: TAB_COLORS[tab].solid,
+                      boxShadow: `0 0 12px ${TAB_COLORS[tab].glow}`,
+                    }
+                  : {}),
+              }}
               className={`min-w-[130px] px-5 rounded-lg border text-sm font-medium transition-colors ${
                 active
-                  ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-contrast)] shadow-[0_0_12px_var(--glow)]"
+                  ? "text-[var(--foreground)]"
                   : "border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)]"
               }`}
             >

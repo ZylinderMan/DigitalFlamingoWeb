@@ -3,6 +3,13 @@
 import { useLanguage } from "@/context/LanguageContext";
 import SectionDivider from "./SectionDivider";
 
+const FAQ_DOT_COLORS = [
+  "var(--palette-pink-deep)",
+  "var(--palette-blue-deep)",
+  "var(--palette-green-deep)",
+  "var(--palette-cream)",
+];
+
 export default function Footer() {
   const { t } = useLanguage();
   const year = new Date().getFullYear();
@@ -31,9 +38,15 @@ export default function Footer() {
           </h3>
           <ul className="mt-3 space-y-4">
             {t.footer.faqItems.map((item, i) => (
-              <li key={i}>
-                <p className="text-[var(--foreground)] text-sm font-medium">{item.question}</p>
-                <p className="text-[var(--muted)] text-sm mt-1">{item.answer}</p>
+              <li key={i} className="flex gap-2">
+                <span
+                  className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
+                  style={{ backgroundColor: FAQ_DOT_COLORS[i % FAQ_DOT_COLORS.length] }}
+                />
+                <div>
+                  <p className="text-[var(--foreground)] text-sm font-medium">{item.question}</p>
+                  <p className="text-[var(--muted)] text-sm mt-1">{item.answer}</p>
+                </div>
               </li>
             ))}
           </ul>
