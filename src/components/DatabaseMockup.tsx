@@ -51,11 +51,11 @@ export default function DatabaseMockup() {
 
   return (
     <div className="flex h-full text-xs">
-      <div className="w-28 shrink-0 border-r border-neutral-800 bg-neutral-950/60 py-3 px-2">
-        <p className="text-[10px] uppercase tracking-wide text-neutral-500 px-1 mb-2">
+      <div className="w-28 shrink-0 border-r border-[var(--border)] bg-[var(--panel-alt)] py-3 px-2">
+        <p className="text-[10px] uppercase tracking-wide text-[var(--muted-strong)] px-1 mb-2">
           {t.showcase.database.sidebarTitle}
         </p>
-        <div className="text-neutral-400 px-1 mb-1">📁 client_db</div>
+        <div className="text-[var(--muted)] px-1 mb-1">📁 client_db</div>
         <div className="pl-3 flex flex-col gap-0.5">
           {TABLES.map((tb) => {
             const active = tb.key === selectedKey;
@@ -64,7 +64,9 @@ export default function DatabaseMockup() {
                 key={tb.key}
                 onClick={() => setSelectedKey(tb.key)}
                 className={`text-left px-2 py-1 rounded transition-colors ${
-                  active ? "bg-neutral-700 text-white" : "text-neutral-500 hover:text-neutral-300"
+                  active
+                    ? "bg-[var(--accent)] text-[var(--accent-contrast)] shadow-[0_0_8px_var(--glow)]"
+                    : "text-[var(--muted)] hover:text-[var(--foreground)]"
                 }`}
               >
                 {tb.name}
@@ -75,9 +77,9 @@ export default function DatabaseMockup() {
       </div>
 
       <div className="flex-1 flex flex-col min-w-0">
-        <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-800">
-          <span className="text-neutral-400 font-mono truncate">SELECT * FROM {table.name};</span>
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-400">
+        <div className="flex items-center justify-between px-3 py-2 border-b border-[var(--border)]">
+          <span className="text-[var(--muted)] truncate">SELECT * FROM {table.name};</span>
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[var(--palette-green-soft)] text-[var(--palette-green-text)]">
             {t.showcase.database.queryStatus}
           </span>
         </div>
@@ -95,7 +97,7 @@ export default function DatabaseMockup() {
               <thead>
                 <tr>
                   {table.columns.map((col) => (
-                    <th key={col} className="text-left text-neutral-500 font-medium border-b border-neutral-800 pb-1 pr-3">
+                    <th key={col} className="text-left text-[var(--muted)] font-medium border-b border-[var(--border)] pb-1 pr-3">
                       {col}
                     </th>
                   ))}
@@ -103,9 +105,9 @@ export default function DatabaseMockup() {
               </thead>
               <tbody>
                 {table.rows.map((row, i) => (
-                  <tr key={i} className="border-b border-neutral-900">
+                  <tr key={i} className="border-b border-[var(--border)]">
                     {row.map((cell, j) => (
-                      <td key={j} className="text-neutral-300 py-1 pr-3 whitespace-nowrap">
+                      <td key={j} className="text-[var(--foreground)] py-1 pr-3 whitespace-nowrap">
                         {cell}
                       </td>
                     ))}

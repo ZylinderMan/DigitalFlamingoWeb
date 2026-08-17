@@ -13,7 +13,7 @@ const TOTAL_HEIGHT = BUTTON_HEIGHT * TABS.length + GAP * (TABS.length - 1);
 const CENTERS = TABS.map((_, i) => BUTTON_HEIGHT / 2 + i * (BUTTON_HEIGHT + GAP));
 const MID_CENTER = CENTERS[1];
 const CORNER_RADIUS = 16;
-const TRUNK_INSET = 32; // distance of the vertical trunk from the buttons' edge
+const TRUNK_INSET = 32;
 
 type Point = { x: number; y: number };
 
@@ -28,9 +28,6 @@ function pointTowards(from: Point, to: Point, distance: number): Point {
   return { x: from.x + (dx / len) * distance, y: from.y + (dy / len) * distance };
 }
 
-// Draws a single path through a list of waypoints, replacing each sharp
-// interior corner with a short quadratic curve — this is what turns the
-// 90-degree elbow into a smooth rounded bend.
 function roundedPath(points: Point[], radius: number): string {
   if (points.length < 2) return "";
   let d = `M ${points[0].x} ${points[0].y}`;
@@ -59,9 +56,6 @@ export default function ShowcaseButtons({
   const connectorRef = useRef<HTMLDivElement>(null);
   const [connectorWidth, setConnectorWidth] = useState(160);
 
-  // Measures the real available width so the line can stretch to fill
-  // whatever gap actually exists between the panel and the buttons,
-  // rather than assuming a fixed distance.
   useEffect(() => {
     const el = connectorRef.current;
     if (!el) return;
@@ -76,35 +70,45 @@ export default function ShowcaseButtons({
   const selectedIndex = TABS.indexOf(selected);
   const trunkX = Math.max(connectorWidth - TRUNK_INSET, 40);
 
-  const activePath = roundedPath(
-    [
-      { x: 0, y: MID_CENTER },
-      { x: trunkX, y: MID_CENTER },
-      { x: trunkX, y: CENTERS[selectedIndex] },
-      { x: connectorWidth, y: CENTERS[selectedIndex] },
-    ],
-    CORNER_RADIUS
-  );
+  // Shared by the backdrop AND the active path — this is what makes
+  // every corner use the identical curve, fixing the mismatch.
+  function pathFor(index: number): string {
+    return roundedPath(
+      [
+        { x: 0, y: MID_CENTER },
+        { x: trunkX, y: MID_CENTER },
+        { x: trunkX, y: CENTERS[index] },
+        { x: connectorWidth, y: CENTERS[index] },
+      ],
+      CORNER_RADIUS
+    );
+  }
+
+  const activePath = pathFor(selectedIndex);
 
   return (
     <div className="flex-1 min-w-0 flex items-center">
       <div ref={connectorRef} className="flex-1 min-w-[60px] hidden md:block" style={{ height: TOTAL_HEIGHT }}>
         <svg width={connectorWidth} height={TOTAL_HEIGHT} className="overflow-visible">
-          {/* dim static reference structure: trunk + a branch to every button */}
-          <line x1={0} y1={MID_CENTER} x2={trunkX} y2={MID_CENTER} stroke="#404040" strokeWidth={1.5} strokeLinecap="round" />
-          <line x1={trunkX} y1={CENTERS[0]} x2={trunkX} y2={CENTERS[2]} stroke="#404040" strokeWidth={1.5} strokeLinecap="round" />
-          {CENTERS.map((cy, i) => (
-            <line key={i} x1={trunkX} y1={cy} x2={connectorWidth} y2={cy} stroke="#404040" strokeWidth={1.5} strokeLinecap="round" />
+          {TABS.map((_, i) => (
+            <path
+              key={i}
+              d={pathFor(i)}
+              fill="none"
+              stroke="var(--border-strong)"
+              strokeWidth={1.5}
+              strokeLinecap="round"
+            />
           ))}
 
-          {/* bright path tracing the active route, animated + rounded */}
           <motion.path
             fill="none"
-            stroke="#ffffff"
+            stroke="var(--accent)"
             strokeWidth={1.5}
             strokeLinecap="round"
             animate={{ d: activePath }}
             transition={{ type: "spring", duration: 0.5 }}
+            style={{ filter: "drop-shadow(0 0 4px var(--glow))" }}
           />
         </svg>
       </div>
@@ -118,7 +122,9 @@ export default function ShowcaseButtons({
               onClick={() => onSelect(tab)}
               style={{ height: BUTTON_HEIGHT }}
               className={`min-w-[130px] px-5 rounded-lg border text-sm font-medium transition-colors ${
-                active ? "border-white bg-neutral-800 text-white" : "border-neutral-800 text-neutral-500 hover:text-neutral-300"
+                active
+                  ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-contrast)] shadow-[0_0_12px_var(--glow)]"
+                  : "border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)]"
               }`}
             >
               {t.showcase.buttons[tab]}

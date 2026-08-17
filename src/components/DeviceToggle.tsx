@@ -17,8 +17,8 @@ export default function DeviceToggle({
         aria-label="Desktop view"
         className={`w-11 h-11 rounded-lg border flex items-center justify-center transition-colors ${
           device === "pc"
-            ? "border-white bg-neutral-800 text-white"
-            : "border-neutral-800 text-neutral-500 hover:text-neutral-300"
+            ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)] shadow-[0_0_10px_var(--glow)]"
+            : "border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)]"
         }`}
       >
         <Monitor size={18} />
@@ -28,8 +28,8 @@ export default function DeviceToggle({
         aria-label="Mobile view"
         className={`w-11 h-11 rounded-lg border flex items-center justify-center transition-colors ${
           device === "phone"
-            ? "border-white bg-neutral-800 text-white"
-            : "border-neutral-800 text-neutral-500 hover:text-neutral-300"
+            ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)] shadow-[0_0_10px_var(--glow)]"
+            : "border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)]"
         }`}
       >
         <Smartphone size={18} />

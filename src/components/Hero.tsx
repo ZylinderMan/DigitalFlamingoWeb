@@ -35,13 +35,13 @@ export default function Hero() {
     0.2 + (words.length - 1) * WORD_STAGGER + WORD_DURATION;
 
   return (
-    <section className="snap-start relative h-screen w-full flex flex-col items-center justify-center overflow-hidden px-6">
+    <section data-snap-section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden px-6">
       <motion.h1
         key={t.home.heading} // re-plays the animation whenever the language changes
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="flex flex-wrap justify-center gap-x-4 text-5xl sm:text-6xl md:text-8xl font-bold text-white text-center leading-tight"
+        className="flex flex-wrap justify-center gap-x-4 text-5xl sm:text-6xl md:text-8xl font-bold text-[var(--foreground)] text-center leading-tight"
       >
         {words.map((word, i) => (
           <span key={i} className="overflow-hidden inline-block pb-2">
@@ -57,7 +57,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: headingRevealTime }}
-        className="mt-6 text-lg sm:text-xl text-neutral-400 text-center"
+        className="mt-6 text-lg sm:text-xl text-[var(--muted)] text-center"
       >
         {t.home.tagline}
       </motion.p>
@@ -87,7 +87,7 @@ function ScrollArrow({ side, delay }: { side: "left" | "right"; delay: number })
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="text-neutral-400"
+        className="text-[var(--muted)]"
         animate={{ y: [0, 8, 0] }}
         transition={{
           duration: 1.6,

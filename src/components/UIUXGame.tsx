@@ -4,13 +4,13 @@ import { useEffect, useRef } from "react";
 import Matter from "matter-js";
 
 const TETROMINOES: { cells: [number, number][]; color: string }[] = [
-  { cells: [[0, 0], [1, 0], [2, 0], [3, 0]], color: "#22d3ee" }, // I
-  { cells: [[0, 0], [1, 0], [0, 1], [1, 1]], color: "#facc15" }, // O
-  { cells: [[0, 0], [1, 0], [2, 0], [1, 1]], color: "#a78bfa" }, // T
-  { cells: [[1, 0], [2, 0], [0, 1], [1, 1]], color: "#4ade80" }, // S
-  { cells: [[0, 0], [1, 0], [1, 1], [2, 1]], color: "#f87171" }, // Z
-  { cells: [[0, 0], [0, 1], [1, 1], [2, 1]], color: "#60a5fa" }, // J
-  { cells: [[2, 0], [0, 1], [1, 1], [2, 1]], color: "#fb923c" }, // L
+  { cells: [[0, 0], [1, 0], [2, 0], [3, 0]], color: "#edc0e0" }, // I — palette pink
+  { cells: [[0, 0], [1, 0], [0, 1], [1, 1]], color: "#c0d5ed" }, // O — palette blue
+  { cells: [[0, 0], [1, 0], [2, 0], [1, 1]], color: "#c7edc0" }, // T — palette green
+  { cells: [[1, 0], [2, 0], [0, 1], [1, 1]], color: "#edddc0" }, // S — palette cream
+  { cells: [[0, 0], [1, 0], [1, 1], [2, 1]], color: "#e2a8ce" }, // Z — deep pink
+  { cells: [[0, 0], [0, 1], [1, 1], [2, 1]], color: "#a8c4e2" }, // J — deep blue
+  { cells: [[2, 0], [0, 1], [1, 1], [2, 1]], color: "#a8dda0" }, // L — deep green
 ];
 
 const BLOCK_SIZE = 24; // was 18
@@ -112,7 +112,7 @@ export default function UIUXGame() {
           ctx.closePath();
           ctx.fillStyle = (part.render.fillStyle as string) || "#888";
           ctx.fill();
-          ctx.strokeStyle = "rgba(0,0,0,0.3)";
+          ctx.strokeStyle = "rgba(74, 53, 80, 0.25)";
           ctx.lineWidth = 1;
           ctx.stroke();
         }

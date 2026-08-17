@@ -22,17 +22,17 @@ export default function WebsiteEmbed({ device }: { device: Device }) {
         transition={{ type: "spring", duration: 0.5 }}
         className={`max-w-full overflow-hidden shadow-2xl ${
           device === "pc"
-            ? "rounded-xl border border-neutral-800 bg-neutral-900"
-            : "rounded-[2rem] border-[6px] border-neutral-800 bg-neutral-900"
+            ? "rounded-xl border border-[var(--border-strong)] bg-[var(--panel)]"
+            : "rounded-[2rem] border-[6px] border-[var(--border-strong)] bg-[var(--panel-alt)]"
         }`}
       >
         {device === "pc" ? (
           <>
-            <div className="flex items-center gap-1.5 px-3 py-2 bg-neutral-800/80 border-b border-neutral-800">
+            <div className="flex items-center gap-1.5 px-3 py-2 bg-[var(--panel-alt)] border-b border-[var(--border)]">
               <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
               <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
               <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-              <span className="ml-3 text-[10px] text-neutral-500 truncate">yoursite.com</span>
+              <span className="ml-3 text-[10px] text-[var(--muted)] truncate">yoursite.com</span>
             </div>
             <iframe
               key={src}
@@ -45,7 +45,7 @@ export default function WebsiteEmbed({ device }: { device: Device }) {
         ) : (
           <>
             <div className="flex justify-center pt-1.5 pb-1">
-              <span className="w-10 h-1.5 rounded-full bg-neutral-700" />
+              <span className="w-10 h-1.5 rounded-full bg-[var(--border-strong)]" />
             </div>
             <iframe
               key={src}
@@ -59,7 +59,7 @@ export default function WebsiteEmbed({ device }: { device: Device }) {
       </motion.div>
 
       {device === "phone" && (
-        <div className="flex items-center gap-5 text-neutral-600">
+        <div className="flex items-center gap-5 text-[var(--muted)]">
           <ChevronLeft size={14} />
           <Circle size={14} />
           <Square size={12} />

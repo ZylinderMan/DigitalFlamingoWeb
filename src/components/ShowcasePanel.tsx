@@ -9,8 +9,8 @@ export type ShowcaseTab = "uiux" | "database" | "payment";
 
 export default function ShowcasePanel({ selected }: { selected: ShowcaseTab }) {
   return (
-    <div className="w-full h-[420px] rounded-xl border border-neutral-800 bg-neutral-900 shadow-2xl overflow-hidden select-none">
-      <div className="flex items-center gap-1.5 px-3 py-2 bg-neutral-800/80 border-b border-neutral-800">
+    <div className="w-full h-[420px] rounded-xl border border-[var(--border-strong)] bg-[var(--panel)] shadow-2xl overflow-hidden select-none">
+      <div className="flex items-center gap-1.5 px-3 py-2 bg-[var(--panel-alt)] border-b border-[var(--border)]">
         <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
         <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
         <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />

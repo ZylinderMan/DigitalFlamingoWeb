@@ -1,20 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
+  --background: #fdf2f8;
+  --panel: #ffffff;
+  --panel-alt: #fbe4f1;
+  --foreground: #4a3550;
+  --muted: #9c7fa0;
+  --muted-strong: #7a5f7e;
+  --border: #f5dced;
+  --border-strong: #edc0e0;
+  --accent: #f472b6;
+  --accent-hover: #ec4899;
+  --accent-soft: rgba(244, 114, 182, 0.14);
+  --accent-contrast: #ffffff;
+  --glow: rgba(244, 114, 182, 0.35);
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Quadratic (tetradic) harmony set, spaced out from the accent pink */
+  --palette-pink: #edc0e0;
+  --palette-pink-deep: #e2a8ce;
+  --palette-blue: #c0d5ed;
+  --palette-blue-deep: #a8c4e2;
+  --palette-green: #c7edc0;
+  --palette-green-deep: #a8dda0;
+  --palette-green-soft: rgba(199, 237, 192, 0.45);
+  --palette-green-text: #3f7a3f;
+  --palette-cream: #edddc0;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-contrast);
 }
 /* Hide the native scrollbar — replaced by <CustomScrollbar /> */
 html {

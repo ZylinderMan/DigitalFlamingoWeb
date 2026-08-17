@@ -37,7 +37,7 @@ export default function PitchBlock() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.6 }}
-          className="flex flex-wrap justify-end gap-x-3 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-snug"
+          className="flex flex-wrap justify-end gap-x-3 text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--foreground)] leading-snug"
         >
           {words.map((word, i) => (
             <span key={i} className="overflow-hidden inline-block pb-1">
@@ -54,7 +54,7 @@ export default function PitchBlock() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.5, delay: headingRevealTime }}
-          className="mt-4 text-base sm:text-lg text-neutral-400"
+          className="mt-4 text-base sm:text-lg text-[var(--muted)]"
         >
           {t.pitch.description}
         </motion.p>

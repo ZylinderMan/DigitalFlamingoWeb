@@ -101,12 +101,12 @@ export default function CustomScrollbar() {
     <div
       ref={trackRef}
       onPointerDown={onTrackPointerDown}
-      className="fixed right-2 top-4 bottom-4 z-40 w-2.5 rounded-full border border-neutral-800 bg-neutral-900 overflow-hidden select-none hidden sm:block"
+      className="fixed right-2 top-4 bottom-4 z-40 w-2.5 rounded-full border border-[var(--border)] bg-[var(--panel)] overflow-hidden select-none hidden sm:block"
     >
       <div
         ref={thumbRef}
         onPointerDown={onThumbPointerDown}
-        className="absolute left-0 top-0 w-full rounded-full bg-neutral-600 hover:bg-neutral-500 active:bg-neutral-400 transition-colors cursor-grab active:cursor-grabbing touch-none"
+        className="absolute left-0 top-0 w-full rounded-full bg-[var(--border-strong)] hover:bg-[var(--accent)] active:bg-[var(--accent-hover)] transition-colors cursor-grab active:cursor-grabbing touch-none"
       />
     </div>
   );

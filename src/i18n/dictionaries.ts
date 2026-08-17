@@ -40,8 +40,8 @@ const en: Dictionary = {
     contact: "Contact",
   },
   home: {
-    tagline: "Fullstack developer",
-    heading: "Hi, we are DigitalFlamingo",
+    tagline: "Anytime",
+    heading: "Got an idea? We will make it a website.",
   },
   pitch: {
     heading: "Websites built for real clients, not just demos.",
@@ -70,12 +70,12 @@ const en: Dictionary = {
     },
   },
   footer: {
-    brand: "Your Name",
+    brand: "DigitalFlamingo",
     contactTitle: "Contact",
-    contactEmail: "hello@yourdomain.com",
+    contactEmail: "contact@digitalflamingo.red",
     faqTitle: "FAQ",
     faqItems: [
-      { question: "What do you do?", answer: "I build fast, modern web experiences." },
+      { question: "What do you do?", answer: "I build fast, modern web, API experiences." },
       { question: "Are you available for freelance?", answer: "Yes — reach out via email." },
     ],
     copyright: "All rights reserved.",
@@ -89,8 +89,8 @@ const fr: Dictionary = {
     contact: "Contact",
   },
   home: {
-    tagline: "Développeur Fullstack",
-    heading: "Bonjour, nous sommes DigitalFlamingo",
+    tagline: "A tout moment",
+    heading: "Vous avez une idée ? Nous la concrétiserons",
   },
   pitch: {
     heading: "Des sites conçus pour de vrais clients, pas juste des démos.",
@@ -119,9 +119,9 @@ const fr: Dictionary = {
     },
   },
   footer: {
-    brand: "Votre Nom",
+    brand: "DigitalFlamingo",
     contactTitle: "Contact",
-    contactEmail: "hello@yourdomain.com",
+    contactEmail: "contact@digitalflamingo.red",
     faqTitle: "FAQ",
     faqItems: [
       { question: "Que faites-vous ?", answer: "Je crée des expériences web modernes et rapides." },
