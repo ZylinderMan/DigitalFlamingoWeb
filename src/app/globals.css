@@ -39,6 +39,11 @@ body {
   color: var(--accent-contrast);
 }
 /* Hide the native scrollbar — replaced by <CustomScrollbar /> */
+html,
+body {
+  overflow-x: hidden;
+}
+
 html {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* old Edge */
