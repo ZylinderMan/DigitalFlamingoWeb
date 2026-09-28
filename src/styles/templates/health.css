@@ -47,6 +47,10 @@
   color: #fff;
 }
 
+.h-topbar__phone {
+  white-space: nowrap;
+}
+
 /* Header */
 .h-header {
   border-bottom: 1px solid var(--h-line);
@@ -91,6 +95,8 @@
 
 .h-nav {
   display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
   gap: 1.1rem;
   font-size: 0.85rem;
   color: var(--h-muted);
@@ -103,6 +109,7 @@
 
 .h-button {
   display: inline-block;
+  flex-shrink: 0;
   padding: 0.65rem 1.2rem;
   border-radius: 999px;
   background: var(--h-teal);
@@ -328,7 +335,7 @@
 
 .h-footer__inner {
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr));
   gap: 2rem;
   padding-block: 2.5rem;
 }
@@ -381,8 +388,26 @@
   }
 }
 
-@container (max-width: 60rem) {
+/* Not enough room for the name, the menu and the button side by side */
+@container (max-width: 68rem) {
   .h-nav {
     display: none;
+  }
+}
+
+/* Very long company names (over 34 characters) need the menu's space too */
+@container (max-width: 80rem) {
+  .h-header__inner:has(.tpl-name--xl) .h-nav {
+    display: none;
+  }
+}
+
+@container (max-width: 36rem) {
+  .h-topbar__hours {
+    display: none;
+  }
+
+  .h-topbar__inner {
+    justify-content: flex-end;
   }
 }

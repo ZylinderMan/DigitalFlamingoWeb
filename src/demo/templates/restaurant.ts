@@ -1,5 +1,5 @@
 import { el } from "../../utils/dom";
-import { ICONS, PLACEHOLDER, brandMark, copyright, icon, keysFor, type TemplateData } from "./shared";
+import { ICONS, PLACEHOLDER, brandMark, companyName, copyright, icon, keysFor, type TemplateData } from "./shared";
 
 const k = keysFor("restaurant");
 
@@ -18,7 +18,7 @@ export function renderRestaurant(data: TemplateData): HTMLElement {
         className: "r-nav r-nav--left",
         children: [el("span", { text: k("navRestaurant") }), el("span", { text: k("navMenus") })],
       }),
-      el("span", { className: "r-brand", children: [brandMark(data, "r-mark"), el("span", { children: [data.company] })] }),
+      el("span", { className: "r-brand", children: [brandMark(data, "r-mark"), companyName(data.company)] }),
       el("span", {
         className: "r-nav r-nav--right",
         children: [
@@ -115,10 +115,10 @@ export function renderRestaurant(data: TemplateData): HTMLElement {
   const footer = el("div", {
     className: "r-footer",
     children: [
-      el("p", { className: "r-footer__brand", children: [data.company] }),
+      el("p", { className: "r-footer__brand", children: [companyName(data.company, "", false)] }),
       el("p", { text: k("footerTagline") }),
       el("p", { children: [PLACEHOLDER.address] }),
-      el("p", { children: [`${PLACEHOLDER.phone}  |  ${PLACEHOLDER.email(data.slug)}`] }),
+      el("p", { className: "tpl-wrap", children: [`${PLACEHOLDER.phone}  |  ${PLACEHOLDER.email(data.slug)}`] }),
       copyright(data.company, "r-footer__copy"),
     ],
   });

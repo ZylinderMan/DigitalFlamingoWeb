@@ -256,6 +256,8 @@ body:has(.demo-dialog[open]) {
 
 .demo-preview__notice {
   color: var(--text-muted);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 30rem) {

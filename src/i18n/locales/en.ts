@@ -7,8 +7,8 @@
  */
 export const en = {
   meta: {
-    title: "Demonstration | Digital Flamingo",
-    brand: "Digital Flamingo",
+    title: "Demonstration | Your Studio",
+    brand: "Your Studio",
   },
   nav: {
     home: "Home",
@@ -200,6 +200,6 @@ export const en = {
   footer: {
     tagline: "Websites designed and built for small businesses.",
     navLabel: "Footer",
-    copyright: "© {year} Digital Flamingo. All rights reserved.",
+    copyright: "© {year} Your Studio. All rights reserved.",
   },
 } as const;

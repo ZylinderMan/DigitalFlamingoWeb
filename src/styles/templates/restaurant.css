@@ -22,7 +22,8 @@
 /* Header: navigation split around a centred brand */
 .r-header {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  /* Side menus keep their natural width; the centred name takes what's left and wraps */
+  grid-template-columns: minmax(max-content, 1fr) minmax(0, auto) minmax(max-content, 1fr);
   align-items: center;
   gap: 1.5rem;
   padding: 1.1rem clamp(1.25rem, 4cqi, 2.5rem);
@@ -32,6 +33,7 @@
 .r-nav {
   display: flex;
   align-items: center;
+  white-space: nowrap;
   gap: 1.5rem;
   font-size: 0.85rem;
   color: var(--r-muted);
@@ -49,6 +51,8 @@
   font-size: 1.4rem;
   color: var(--r-wine);
   min-width: 0;
+  justify-content: center;
+  text-align: center;
 }
 
 .r-mark {
@@ -322,16 +326,35 @@
   opacity: 0.7;
 }
 
-@container (max-width: 44rem) {
+/* Not enough room for both menus around the name: keep only the booking button */
+@container (max-width: 60rem) {
   .r-header {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .r-brand {
+    justify-content: flex-start;
+    text-align: left;
   }
 
   .r-nav--left,
   .r-nav__link {
     display: none;
   }
+}
 
+/* Phones: the hero's own "Book a table" button is right below, so the name gets the whole row */
+@container (max-width: 32rem) {
+  .r-header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .r-nav--right {
+    display: none;
+  }
+}
+
+@container (max-width: 44rem) {
   .r-venue,
   .r-practical {
     grid-template-columns: 1fr;

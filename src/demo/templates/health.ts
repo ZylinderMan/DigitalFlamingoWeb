@@ -1,5 +1,5 @@
 import { el } from "../../utils/dom";
-import { ICONS, PLACEHOLDER, brandMark, copyright, icon, keysFor, type TemplateData } from "./shared";
+import { ICONS, PLACEHOLDER, brandMark, companyName, copyright, icon, keysFor, type TemplateData } from "./shared";
 
 const k = keysFor("health");
 
@@ -20,7 +20,7 @@ export function renderHealth(data: TemplateData): HTMLElement {
           el("span", { children: [PLACEHOLDER.address] }),
           el("span", {
             className: "h-topbar__right",
-            children: [el("span", { text: k("topHours") }), el("strong", { children: [PLACEHOLDER.phone] })],
+            children: [el("span", { className: "h-topbar__hours", text: k("topHours") }), el("strong", { className: "h-topbar__phone", children: [PLACEHOLDER.phone] })],
           }),
         ],
       }),
@@ -33,7 +33,7 @@ export function renderHealth(data: TemplateData): HTMLElement {
       el("div", {
         className: "h-wrap h-header__inner",
         children: [
-          el("span", { className: "h-brand", children: [brandMark(data, "h-mark"), el("span", { children: [data.company] })] }),
+          el("span", { className: "h-brand", children: [brandMark(data, "h-mark"), companyName(data.company)] }),
           el("span", {
             className: "h-nav",
             children: [
@@ -157,7 +157,7 @@ export function renderHealth(data: TemplateData): HTMLElement {
         className: "h-wrap h-footer__inner",
         children: [
           el("div", {
-            children: [brandMark(data, "h-mark"), el("p", { className: "h-footer__brand", children: [data.company] })],
+            children: [brandMark(data, "h-mark"), el("p", { className: "h-footer__brand", children: [companyName(data.company, "", false)] })],
           }),
           footerColumn("footerAddress", el("p", { children: [PLACEHOLDER.address] })),
           footerColumn("footerPhone", el("p", { children: [PLACEHOLDER.phone] })),

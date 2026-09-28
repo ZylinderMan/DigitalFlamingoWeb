@@ -6,8 +6,8 @@ import type { Dictionary } from "../types";
  */
 export const fr: Dictionary = {
   meta: {
-    title: "Démonstration | Digital Flamingo",
-    brand: "Digital Flamingo",
+    title: "Démonstration | Your Studio",
+    brand: "Your Studio",
   },
   nav: {
     home: "Accueil",
@@ -199,6 +199,6 @@ export const fr: Dictionary = {
   footer: {
     tagline: "Des sites web conçus et réalisés pour les petites entreprises.",
     navLabel: "Pied de page",
-    copyright: "© {year} Digital Flamingo. Tous droits réservés.",
+    copyright: "© {year} Your Studio. Tous droits réservés.",
   },
 };

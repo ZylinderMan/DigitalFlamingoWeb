@@ -62,6 +62,21 @@ export function brandMark(data: TemplateData, className: string): HTMLElement {
       });
 }
 
+/**
+ * The company name, safe for any length:
+ * wraps (even inside very long words), shrinks a notch for long names and,
+ * when `clamp` is true, stops at 2 lines with "…" (full name on hover).
+ * Styles: .tpl-name in src/styles/mockup.css
+ */
+export function companyName(company: string, className = "", clamp = true): HTMLElement {
+  const size = company.length > 34 ? "tpl-name--xl" : company.length > 20 ? "tpl-name--l" : "";
+  return el("span", {
+    className: ["tpl-name", clamp ? "tpl-name--clamp" : "", size, className].filter(Boolean).join(" "),
+    attrs: { title: company },
+    children: [company],
+  });
+}
+
 /** Inline SVG from a trusted, static string (never pass user input here) */
 export function icon(markup: string, className = ""): HTMLElement {
   const span = el("span", { className, attrs: { "aria-hidden": "true" } });
@@ -72,7 +87,7 @@ export function icon(markup: string, className = ""): HTMLElement {
 /** "© 2026 Company. All rights reserved." — live translated */
 export function copyright(company: string, className = ""): HTMLElement {
   return el("p", {
-    className,
+    className: ["tpl-wrap", className].filter(Boolean).join(" "),
     text: "mockup.copyright",
     params: { year: new Date().getFullYear(), company },
   });

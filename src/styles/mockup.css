@@ -88,6 +88,38 @@
   font-size: 1rem;
   line-height: 1.6;
   text-align: left;
+  /* Long words the visitor typed (emails, names) break instead of overflowing */
+  overflow-wrap: break-word;
+}
+
+/* ---------- Company name (see companyName() in templates/shared.ts) ---------- */
+.tpl-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+/* Header version: never more than 2 lines */
+.tpl-name--clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.tpl-name--l {
+  font-size: 0.88em;
+}
+
+.tpl-name--xl {
+  font-size: 0.76em;
+}
+
+.tpl-wrap {
+  overflow-wrap: anywhere;
 }
 
 /* Isolate templates from the site's own global styles (base.css) */

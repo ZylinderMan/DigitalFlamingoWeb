@@ -88,6 +88,8 @@
 
 .b-nav {
   display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
   gap: 1.5rem;
   font-size: 0.9rem;
   font-weight: 600;
@@ -332,7 +334,7 @@
 
 .b-footer__inner {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
   gap: 2rem;
   padding-block: 2.5rem;
 }
@@ -354,8 +356,14 @@
   font-size: 0.8rem;
 }
 
+/* Not enough room for the name and the menu side by side */
+@container (max-width: 56rem) {
+  .b-nav {
+    display: none;
+  }
+}
+
 @container (max-width: 44rem) {
-  .b-nav,
   .b-topbar__links {
     display: none;
   }

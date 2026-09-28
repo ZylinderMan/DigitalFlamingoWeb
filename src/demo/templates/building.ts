@@ -1,5 +1,5 @@
 import { el } from "../../utils/dom";
-import { PLACEHOLDER, brandMark, copyright, keysFor, type TemplateData } from "./shared";
+import { PLACEHOLDER, brandMark, companyName, copyright, keysFor, type TemplateData } from "./shared";
 
 const k = keysFor("building");
 
@@ -32,7 +32,7 @@ export function renderBuilding(data: TemplateData): HTMLElement {
       el("div", {
         className: "b-wrap b-header__inner",
         children: [
-          el("span", { className: "b-brand", children: [brandMark(data, "b-mark"), el("span", { children: [data.company] })] }),
+          el("span", { className: "b-brand", children: [brandMark(data, "b-mark"), companyName(data.company)] }),
           el("span", {
             className: "b-nav",
             children: [
@@ -176,7 +176,7 @@ export function renderBuilding(data: TemplateData): HTMLElement {
         children: [
           el("div", {
             children: [
-              el("p", { className: "b-footer__brand", children: [data.company] }),
+              el("p", { className: "b-footer__brand", children: [companyName(data.company, "", false)] }),
               el("p", { text: k("footerAbout") }),
             ],
           }),
@@ -184,7 +184,7 @@ export function renderBuilding(data: TemplateData): HTMLElement {
             children: [
               el("p", { children: [PLACEHOLDER.address] }),
               el("p", { children: [PLACEHOLDER.phone] }),
-              el("p", { children: [PLACEHOLDER.email(data.slug)] }),
+              el("p", { className: "tpl-wrap", children: [PLACEHOLDER.email(data.slug)] }),
             ],
           }),
           el("div", {
