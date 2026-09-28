@@ -1,0 +1,265 @@
+/* =====================================================================
+   LIVE DEMO: section, full-screen dialog, form, preview toolbar
+   ===================================================================== */
+
+/* ---------- Section: a quiet highlighted panel ---------- */
+.demo__panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem 3rem;
+  padding: clamp(1.75rem, 5vw, 3.5rem);
+  border: 1px solid var(--highlight-border);
+  border-radius: calc(var(--radius) * 2);
+  background: var(--highlight-bg);
+}
+
+.demo__panel .section__title {
+  max-width: 22ch;
+}
+
+.demo__panel .button {
+  flex-shrink: 0;
+}
+
+/* ---------- Dialog shell ---------- */
+.demo-dialog {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.demo-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  animation: demo-dialog-in 0.25s ease-out;
+}
+
+.demo-dialog::backdrop {
+  background: var(--color-tertiary);
+}
+
+@keyframes demo-dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-dialog[open] {
+    animation: none;
+  }
+}
+
+/* Stop the page behind the dialog from scrolling */
+body:has(.demo-dialog[open]) {
+  overflow: hidden;
+}
+
+.demo-dialog__bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem var(--gutter);
+  border-bottom: 1px solid var(--divider);
+  background: var(--bg);
+}
+
+.demo-dialog__title {
+  font-size: var(--text-lg);
+  margin-right: auto;
+}
+
+.demo-dialog__title:focus {
+  outline: none;
+}
+
+.demo-dialog__body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ---------- Form ---------- */
+.demo-form {
+  max-width: 44rem;
+  margin-inline: auto;
+  padding: clamp(2rem, 6vw, 4rem) var(--gutter) 4rem;
+  display: grid;
+  gap: 2.25rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.field__label {
+  font-weight: 600;
+  padding: 0;
+}
+
+.field__input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--button-ghost-border);
+  background: var(--bg-raised);
+  color: var(--text);
+  font: inherit;
+}
+
+.field__input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.field__input[aria-invalid="true"] {
+  border-color: #ff8a8a;
+}
+
+.field__hint {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.field__error {
+  color: #ffb3b3;
+  font-size: var(--text-sm);
+}
+
+/* Sector picker: radio buttons styled as cards */
+.sector-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.75rem;
+}
+
+.sector-option {
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+  padding: 1.1rem;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.sector-option:hover {
+  border-color: var(--button-ghost-border);
+}
+
+.sector-option:has(input:checked) {
+  border-color: var(--color-primary);
+  background: var(--bg-raised);
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
+.sector-option:has(input:focus-visible) {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.sector-option__icon svg {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.4rem;
+}
+
+.sector-option__name {
+  font-weight: 600;
+}
+
+.sector-option__desc {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+}
+
+/* Logo picker */
+.logo-picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-picker:has(input:focus-visible) .logo-picker__choose {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.logo-picker__preview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.logo-picker__image {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  background: var(--color-primary);
+  border-radius: var(--radius);
+  padding: 0.25rem;
+}
+
+.logo-picker__name {
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--text-sm);
+}
+
+.logo-picker__remove {
+  border: 0;
+  background: none;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: var(--text-sm);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.demo-form__submit {
+  justify-self: start;
+}
+
+/* ---------- Preview ---------- */
+.demo-preview {
+  padding: 1.5rem var(--gutter) 3rem;
+}
+
+.demo-preview__toolbar {
+  max-width: 80rem;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.demo-preview__notice {
+  color: var(--text-muted);
+}
+
+@media (max-width: 30rem) {
+  .demo-dialog__title {
+    font-size: var(--text-base);
+  }
+}

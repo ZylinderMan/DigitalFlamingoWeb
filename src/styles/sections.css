@@ -1,0 +1,94 @@
+/* =====================================================================
+   SECTIONS
+   Every section is <section class="section" data-tone="…" data-divider="…">
+   ===================================================================== */
+
+.section {
+  position: relative;
+  padding-block: var(--section-padding);
+  background: var(--bg);
+}
+
+.section[data-tone="raised"] {
+  background: var(--bg-raised);
+}
+
+.section[data-tone="accent"] {
+  background: var(--bg-accent);
+}
+
+.section[data-full-height="true"] {
+  min-height: calc(100svh - var(--header-height));
+  display: flex;
+  align-items: center;
+}
+
+/* Subtle divider at the top of every section (except when disabled) */
+.section[data-divider="true"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: min(var(--content-width), 100% - 2 * var(--gutter));
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--divider) 15%, var(--divider) 85%, transparent);
+}
+
+.section__inner {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section__title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.section__lead {
+  color: var(--text-muted);
+  font-size: var(--text-lg);
+}
+
+/* ---------- Hero ---------- */
+.hero__title {
+  font-size: var(--text-hero);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  max-width: 14ch;
+  margin-bottom: 1.5rem;
+}
+
+.hero__subtitle {
+  color: var(--text-muted);
+  font-size: var(--text-lg);
+  margin-bottom: 2.5rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ---------- Services ---------- */
+.services__list {
+  list-style: none;
+  margin: 3rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 2.5rem;
+}
+
+.services__item h3 {
+  font-size: var(--text-lg);
+  margin-bottom: 0.5rem;
+}
+
+.services__item p {
+  color: var(--text-muted);
+}

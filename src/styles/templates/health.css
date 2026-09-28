@@ -1,0 +1,388 @@
+/* =====================================================================
+   TEMPLATE: Healthcare & independent professions (practice website)
+   Palette and fonts: edit the variables below.
+   ===================================================================== */
+
+.tpl-health {
+  --h-teal: #1b7888;
+  --h-teal-dark: #135663;
+  --h-mint: #e3f2f3;
+  --h-sky: #f3f9fa;
+  --h-line: #d6e6e9;
+  --h-text: #1c3440;
+  --h-muted: #56707c;
+  --h-font: "Instrument Sans", system-ui, sans-serif;
+
+  background: #fff;
+  color: var(--h-text);
+  font-family: var(--h-font);
+}
+
+.h-wrap {
+  max-width: 64rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4cqi, 2.5rem);
+}
+
+/* Info bar */
+.h-topbar {
+  background: var(--h-teal-dark);
+  color: #d6ecef;
+  font-size: 0.8rem;
+}
+
+.h-topbar__inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.45rem;
+}
+
+.h-topbar__right {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.h-topbar strong {
+  color: #fff;
+}
+
+/* Header */
+.h-header {
+  border-bottom: 1px solid var(--h-line);
+}
+
+.h-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-block: 0.9rem;
+}
+
+.h-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: auto;
+  min-width: 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--h-teal-dark);
+}
+
+.h-mark {
+  width: 2.6rem;
+  height: 2.6rem;
+  flex-shrink: 0;
+}
+
+.h-mark--image {
+  object-fit: contain;
+}
+
+.h-mark--monogram {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--h-mint);
+  color: var(--h-teal-dark);
+  font-size: 0.9rem;
+}
+
+.h-nav {
+  display: flex;
+  gap: 1.1rem;
+  font-size: 0.85rem;
+  color: var(--h-muted);
+}
+
+.h-nav .is-active {
+  color: var(--h-teal);
+  font-weight: 600;
+}
+
+.h-button {
+  display: inline-block;
+  padding: 0.65rem 1.2rem;
+  border-radius: 999px;
+  background: var(--h-teal);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.h-button--light {
+  background: #fff;
+  color: var(--h-teal-dark);
+}
+
+/* Hero */
+.h-hero {
+  background: linear-gradient(180deg, var(--h-sky), #fff);
+}
+
+.h-hero__inner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  padding-block: clamp(3rem, 8cqi, 5rem);
+}
+
+.h-hero__title {
+  font-size: clamp(2rem, 5cqi, 3.1rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--h-teal-dark);
+  max-width: 18ch;
+  margin-bottom: 1.25rem;
+}
+
+.h-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.h-tags span {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: var(--h-mint);
+  color: var(--h-teal-dark);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.h-hero__text {
+  color: var(--h-muted);
+  max-width: 46ch;
+  margin-bottom: 1.75rem;
+}
+
+.h-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.h-link {
+  color: var(--h-teal);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.h-art {
+  justify-self: center;
+  width: 100%;
+  max-width: 18rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 58% 42% 55% 45% / 48% 56% 44% 52%;
+  background: var(--h-mint);
+  color: var(--h-teal);
+}
+
+.h-art__icon {
+  width: 40%;
+}
+
+/* Sections */
+.h-section {
+  padding-block: clamp(2.5rem, 6cqi, 4.5rem);
+}
+
+.h-section--tinted {
+  background: var(--h-sky);
+}
+
+.h-heading {
+  font-size: clamp(1.5rem, 3.2cqi, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--h-teal-dark);
+  margin-bottom: 1rem;
+}
+
+.h-heading--center {
+  text-align: center;
+}
+
+.h-lead {
+  text-align: center;
+  color: var(--h-muted);
+  max-width: 50ch;
+  margin: 0 auto 2.25rem;
+}
+
+.h-practice {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.h-practice p {
+  color: var(--h-muted);
+}
+
+.h-practice p + p {
+  margin-top: 0.9rem;
+}
+
+.h-checklist {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.75rem;
+  border: 1px solid var(--h-line);
+  border-radius: 1rem;
+  background: var(--h-sky);
+}
+
+.h-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-weight: 500;
+}
+
+.h-checklist__icon {
+  flex-shrink: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  padding: 0.2rem;
+  border-radius: 50%;
+  background: var(--h-teal);
+  color: #fff;
+}
+
+.h-areas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.h-area {
+  display: flex;
+  gap: 1.1rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: #fff;
+  border: 1px solid var(--h-line);
+}
+
+.h-area__icon {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  padding: 0.6rem;
+  border-radius: 50%;
+  background: var(--h-mint);
+  color: var(--h-teal);
+}
+
+.h-area h5 {
+  font-size: 1.05rem;
+  color: var(--h-teal-dark);
+  margin-bottom: 0.3rem;
+}
+
+.h-area p {
+  color: var(--h-muted);
+  font-size: 0.95rem;
+}
+
+/* Booking band */
+.h-booking {
+  background: var(--h-teal);
+  color: #fff;
+}
+
+.h-booking__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 2.25rem;
+}
+
+.h-booking h4 {
+  font-size: clamp(1.3rem, 2.8cqi, 1.6rem);
+  margin-bottom: 0.25rem;
+}
+
+.h-booking p {
+  opacity: 0.85;
+}
+
+/* Footer */
+.h-footer {
+  background: #0f2f37;
+  color: #b9d0d5;
+  font-size: 0.875rem;
+}
+
+.h-footer__inner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  gap: 2rem;
+  padding-block: 2.5rem;
+}
+
+.h-footer__brand {
+  margin-top: 0.6rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.h-footer__label {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.h-footer__link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.h-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-block: 1.1rem;
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+  font-size: 0.8rem;
+}
+
+@container (max-width: 44rem) {
+  .h-nav,
+  .h-header .h-button,
+  .h-topbar__inner > span:first-child,
+  .h-art {
+    display: none;
+  }
+
+  .h-hero__inner,
+  .h-practice,
+  .h-areas,
+  .h-footer__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .h-booking__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@container (max-width: 60rem) {
+  .h-nav {
+    display: none;
+  }
+}

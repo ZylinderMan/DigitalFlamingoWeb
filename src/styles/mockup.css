@@ -1,0 +1,107 @@
+/* =====================================================================
+   MOCKUP FRAME: the fake browser window around every sample website.
+   Each sector's own styles live in src/styles/templates/<sector>.css
+   ===================================================================== */
+
+.browser {
+  max-width: 80rem;
+  margin-inline: auto;
+  border-radius: 12px;
+  border: 1px solid var(--divider);
+  box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.6);
+  /* clip (not hidden) so the sticky window bar keeps working */
+  overflow: clip;
+  /* Templates adapt to the window's width with @container queries */
+  container-type: inline-size;
+}
+
+.browser__chrome {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  background: #e6e7ea;
+  border-bottom: 1px solid #d3d5da;
+}
+
+.browser__dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.browser__dots span {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: #c3c6cc;
+}
+
+.browser__url {
+  flex: 1;
+  min-width: 0;
+  max-width: 28rem;
+  margin-inline: auto;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  background: #fff;
+  color: #4a4f57;
+  font: 0.8rem/1.4 var(--font-body);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Always-visible "Demonstration" label */
+.browser__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: var(--color-tertiary);
+  color: var(--color-primary);
+  font: 600 0.75rem/1.2 var(--font-body);
+  cursor: help;
+}
+
+.browser__badge::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #f5b82e;
+}
+
+@container (max-width: 30rem) {
+  .browser__dots {
+    display: none;
+  }
+}
+
+/* Shared resets for every template */
+.tpl {
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Isolate templates from the site's own global styles (base.css) */
+.tpl :where(h3, h4, h5, p, ul, ol, dl, dd, blockquote) {
+  margin: 0;
+  max-width: none;
+}
+
+.tpl :where(h3, h4, h5) {
+  font-family: inherit;
+  line-height: 1.2;
+}
+
+.tpl :where(ul, ol) {
+  padding: 0;
+  list-style: none;
+}

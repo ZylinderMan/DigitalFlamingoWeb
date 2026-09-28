@@ -1,1 +1,0 @@
-export type Device = "pc" | "phone";

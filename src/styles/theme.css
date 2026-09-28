@@ -1,0 +1,54 @@
+/* =====================================================================
+   THEME
+   Change the three palette colours below and the whole site re-themes.
+   Everything else in the CSS reads the *semantic* tokens further down,
+   never raw hex values, so you only ever edit colours in this file.
+   ===================================================================== */
+
+:root {
+  /* ---------- 1. Palette ------------------------------------------- */
+  --color-primary: #ffffff;   /* white           */
+  --color-secondary: #1d3a8a; /* dark blue       */
+  --color-tertiary: #070d24;  /* very dark blue  */
+  /* Add more when needed, e.g.:
+     --color-quaternary: #7cc4ff;
+     then point a semantic token at it below. */
+
+  /* ---------- 2. Semantic tokens (what the palette is used for) ---- */
+  --bg: var(--color-tertiary);
+  --bg-raised: color-mix(in srgb, var(--color-secondary) 30%, var(--color-tertiary));
+  --bg-accent: var(--color-secondary);
+
+  /* Subtle highlight used for call-to-action panels */
+  --highlight-bg: color-mix(in srgb, var(--color-secondary) 20%, var(--color-tertiary));
+  --highlight-border: color-mix(in srgb, var(--color-secondary) 80%, var(--color-primary));
+
+  --text: var(--color-primary);
+  --text-muted: color-mix(in srgb, var(--color-primary) 68%, transparent);
+
+  --divider: color-mix(in srgb, var(--color-primary) 16%, transparent);
+  --focus-ring: color-mix(in srgb, var(--color-primary) 85%, var(--color-secondary));
+
+  --button-bg: var(--color-primary);
+  --button-text: var(--color-tertiary);
+  --button-ghost-border: color-mix(in srgb, var(--color-primary) 40%, transparent);
+
+  --header-bg: color-mix(in srgb, var(--color-tertiary) 82%, transparent);
+
+  /* ---------- 3. Typography --------------------------------------- */
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  --text-hero: clamp(2.6rem, 1.4rem + 5.2vw, 5.5rem);
+
+  /* ---------- 4. Layout ------------------------------------------- */
+  --content-width: 72rem;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --section-padding: clamp(4rem, 10vw, 8rem);
+  --header-height: 4.25rem;
+  --radius: 0.5rem;
+}

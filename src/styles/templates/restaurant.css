@@ -1,0 +1,343 @@
+/* =====================================================================
+   TEMPLATE: Restaurant (upscale, cellar and vineyard tones)
+   Palette and fonts: edit the variables below.
+   ===================================================================== */
+
+.tpl-restaurant {
+  --r-wine: #3b171d;
+  --r-wine-deep: #241013;
+  --r-cream: #f8f3ea;
+  --r-sand: #ece2d2;
+  --r-gold: #b8905a;
+  --r-text: #2c1e1b;
+  --r-muted: #715f57;
+  --r-serif: "Fraunces", Georgia, serif;
+  --r-sans: "Instrument Sans", system-ui, sans-serif;
+
+  background: var(--r-cream);
+  color: var(--r-text);
+  font-family: var(--r-sans);
+}
+
+/* Header: navigation split around a centred brand */
+.r-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.1rem clamp(1.25rem, 4cqi, 2.5rem);
+  border-bottom: 1px solid var(--r-sand);
+}
+
+.r-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--r-muted);
+}
+
+.r-nav--right {
+  justify-content: flex-end;
+}
+
+.r-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--r-serif);
+  font-size: 1.4rem;
+  color: var(--r-wine);
+  min-width: 0;
+}
+
+.r-mark {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+}
+
+.r-mark--image {
+  object-fit: contain;
+}
+
+.r-mark--monogram {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--r-gold);
+  border-radius: 50%;
+  color: var(--r-gold);
+  font-size: 0.9rem;
+}
+
+.r-button {
+  display: inline-block;
+  padding: 0.7rem 1.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.r-button--outline {
+  border: 1px solid var(--r-gold);
+  color: var(--r-wine);
+  padding: 0.5rem 1rem;
+}
+
+.r-button--gold {
+  background: var(--r-gold);
+  color: var(--r-wine-deep);
+}
+
+.r-button--ghost {
+  border: 1px solid rgb(248 243 234 / 0.5);
+  color: var(--r-cream);
+}
+
+/* Hero: cellar-toned, centred */
+.r-hero {
+  text-align: center;
+  padding: clamp(4rem, 12cqi, 8rem) clamp(1.25rem, 6cqi, 4rem);
+  color: var(--r-cream);
+  background:
+    radial-gradient(ellipse at 25% 15%, rgb(122 44 52 / 0.55), transparent 55%),
+    radial-gradient(ellipse at 85% 95%, rgb(184 144 90 / 0.18), transparent 50%),
+    var(--r-wine-deep);
+}
+
+.r-hero__title {
+  font-family: var(--r-serif);
+  font-weight: 400;
+  font-size: clamp(2.3rem, 6.5cqi, 4.2rem);
+  line-height: 1.08;
+  max-width: 16ch;
+  margin: 0 auto 1.25rem;
+}
+
+.r-hero__text {
+  max-width: 44ch;
+  margin: 0 auto 2.25rem;
+  opacity: 0.8;
+  font-size: 1.05rem;
+}
+
+.r-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* Philosophy statement */
+.r-intro {
+  text-align: center;
+  padding: clamp(3rem, 8cqi, 5rem) clamp(1.25rem, 6cqi, 4rem);
+}
+
+.r-ornament {
+  display: block;
+  width: 7rem;
+  margin: 0 auto 1.5rem;
+  color: var(--r-gold);
+}
+
+.r-intro p {
+  font-family: var(--r-serif);
+  font-size: clamp(1.25rem, 2.8cqi, 1.6rem);
+  line-height: 1.5;
+  max-width: 34ch;
+  margin-inline: auto;
+}
+
+/* Venues: alternating rows */
+.r-section {
+  padding: clamp(2.5rem, 7cqi, 4.5rem) clamp(1.25rem, 5cqi, 3rem);
+  max-width: 64rem;
+  margin-inline: auto;
+}
+
+.r-heading {
+  font-family: var(--r-serif);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 4cqi, 2.4rem);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.r-heading--left {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.r-venues {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.r-venue {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(1.5rem, 5cqi, 3.5rem);
+}
+
+.r-venue:nth-child(even) .r-venue__panel {
+  order: 2;
+}
+
+.r-venue__panel {
+  aspect-ratio: 16 / 10;
+  display: grid;
+  place-items: center;
+  color: var(--r-gold);
+  background:
+    radial-gradient(circle at 30% 30%, rgb(122 44 52 / 0.6), transparent 60%),
+    var(--r-wine);
+}
+
+.r-venue__icon {
+  width: 3.5rem;
+}
+
+.r-venue__body h5 {
+  font-family: var(--r-serif);
+  font-weight: 400;
+  font-size: 1.55rem;
+  color: var(--r-wine);
+  margin-bottom: 0.6rem;
+}
+
+.r-venue__body p {
+  color: var(--r-muted);
+  max-width: 38ch;
+}
+
+.r-venue__body .r-venue__meta {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--r-sand);
+  color: var(--r-gold);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Chef quote */
+.r-quote {
+  background: var(--r-sand);
+  text-align: center;
+  padding: clamp(3rem, 8cqi, 5rem) clamp(1.25rem, 6cqi, 4rem);
+}
+
+.r-quote blockquote p {
+  font-family: var(--r-serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 3.6cqi, 2.1rem);
+  line-height: 1.35;
+  color: var(--r-wine);
+  max-width: 30ch;
+  margin-inline: auto;
+}
+
+.r-quote__role {
+  margin-top: 1.25rem;
+  color: var(--r-muted);
+  font-size: 0.9rem;
+}
+
+/* Hours + booking */
+.r-practical {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.r-hours {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.r-hours dt,
+.r-hours dd {
+  padding-block: 0.75rem;
+  border-bottom: 1px dotted var(--r-gold);
+}
+
+.r-hours dt {
+  color: var(--r-muted);
+  padding-right: 1.5rem;
+}
+
+.r-hours dd {
+  text-align: right;
+  font-weight: 600;
+}
+
+.r-booking {
+  background: var(--r-wine);
+  color: var(--r-cream);
+  padding: 2rem;
+}
+
+.r-booking h5 {
+  font-family: var(--r-serif);
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.r-booking p {
+  opacity: 0.85;
+}
+
+.r-booking .r-booking__phone {
+  font-family: var(--r-serif);
+  font-size: 1.4rem;
+  opacity: 1;
+  margin-block: 1rem 1.25rem;
+  color: var(--r-gold);
+}
+
+/* Footer */
+.r-footer {
+  background: var(--r-wine-deep);
+  color: #cbb9a8;
+  text-align: center;
+  font-size: 0.875rem;
+  padding: 3rem 1.5rem 2rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.r-footer__brand {
+  font-family: var(--r-serif);
+  font-size: 1.5rem;
+  color: var(--r-cream);
+}
+
+.r-footer__copy {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+@container (max-width: 44rem) {
+  .r-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .r-nav--left,
+  .r-nav__link {
+    display: none;
+  }
+
+  .r-venue,
+  .r-practical {
+    grid-template-columns: 1fr;
+  }
+
+  .r-venue:nth-child(even) .r-venue__panel {
+    order: 0;
+  }
+}
