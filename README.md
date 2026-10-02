@@ -10,5 +10,6 @@
 - Languages: `src/i18n/locales/` (register new ones in `locales/index.ts`)
 - Live demo: sector list in `src/demo/sectors.ts`, one layout per sector in `src/demo/templates/`,
   one stylesheet per sector in `src/styles/templates/`, texts under `sectors.*` and `templates.*` in each dictionary
+- Booking popup (restaurant & health): `src/demo/booking/`, styles in `src/styles/booking.css`
 - Demo links: `/#demo-building`, `/#demo-restaurant`, `/#demo-health` open the demo on that sector
 - Contact email (footer): `src/config.ts`

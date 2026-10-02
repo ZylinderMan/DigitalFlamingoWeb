@@ -137,3 +137,63 @@
   padding: 0;
   list-style: none;
 }
+
+/* Buttons look like whatever class they're given (links, pills…) */
+.tpl :where(button) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.tpl :where(button, select, input):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* Sections that menu items scroll to: stop below the sticky browser bar */
+.tpl [data-section] {
+  scroll-margin-top: 3.25rem;
+}
+
+.tpl [data-section]:focus {
+  outline: none;
+}
+
+/* ---------- Phone menu (shown by each template's CSS at its own breakpoint) ---------- */
+.tpl-menu-toggle {
+  display: none;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.4rem;
+}
+
+.tpl-menu-toggle svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.tpl-mobile-menu {
+  display: none;
+  flex-direction: column;
+  grid-column: 1 / -1;
+  padding-bottom: 0.75rem;
+}
+
+.tpl-mobile-menu button {
+  padding: 0.8rem 0;
+  font-weight: 600;
+  text-align: left;
+  border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+}
+
+.tpl-mobile-menu .is-active {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}

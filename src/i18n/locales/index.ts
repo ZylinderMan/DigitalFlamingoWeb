@@ -9,6 +9,8 @@ export interface LocaleDefinition {
   short: string;
   /** Value for <html lang="…"> */
   htmlLang: string;
+  /** Regional format for dates written by code, e.g. "en-GB" → "Sunday 1 November 2026" */
+  dateLocale: string;
   dictionary: Dictionary;
 }
 
@@ -18,8 +20,8 @@ export interface LocaleDefinition {
  * and add one line here. The switcher picks it up automatically.
  */
 export const locales = {
-  en: { label: "English", short: "EN", htmlLang: "en", dictionary: en },
-  fr: { label: "Français", short: "FR", htmlLang: "fr", dictionary: fr },
+  en: { label: "English", short: "EN", htmlLang: "en", dateLocale: "en-GB", dictionary: en },
+  fr: { label: "Français", short: "FR", htmlLang: "fr", dateLocale: "fr-FR", dictionary: fr },
 } satisfies Record<string, LocaleDefinition>;
 
 export type Locale = keyof typeof locales;

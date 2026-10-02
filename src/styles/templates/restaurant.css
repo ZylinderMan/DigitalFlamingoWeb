@@ -43,6 +43,10 @@
   justify-content: flex-end;
 }
 
+.r-nav button:not(.r-button):hover {
+  color: var(--r-wine);
+}
+
 .r-brand {
   display: flex;
   align-items: center;
@@ -341,15 +345,21 @@
   .r-nav__link {
     display: none;
   }
+
+  .r-header .tpl-menu-toggle {
+    display: grid;
+    color: var(--r-wine);
+  }
+
+  .r-header[data-menu-open="true"] .tpl-mobile-menu {
+    display: flex;
+    color: var(--r-wine);
+  }
 }
 
 /* Phones: the hero's own "Book a table" button is right below, so the name gets the whole row */
 @container (max-width: 32rem) {
-  .r-header {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .r-nav--right {
+  .r-nav--right .r-button {
     display: none;
   }
 }
@@ -363,4 +373,22 @@
   .r-venue:nth-child(even) .r-venue__panel {
     order: 0;
   }
+}
+
+/* Booking popup colours (see src/styles/booking.css) */
+.r-modal {
+  --bk-bg: var(--r-cream);
+  --bk-text: var(--r-text);
+  --bk-muted: var(--r-muted);
+  --bk-line: var(--r-sand);
+  --bk-soft: var(--r-sand);
+  --bk-accent: var(--r-wine);
+  --bk-on-accent: var(--r-cream);
+  --bk-radius: 2px;
+  --bk-heading-font: var(--r-serif);
+}
+
+.r-modal .booking__title {
+  font-weight: 400;
+  color: var(--r-wine);
 }

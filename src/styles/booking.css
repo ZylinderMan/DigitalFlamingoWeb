@@ -1,0 +1,352 @@
+/* =====================================================================
+   BOOKING POPUP + CALENDAR (used by the restaurant and health templates)
+   Colours come from --bk-* variables that each template sets on its
+   modal class (.r-modal, .h-modal), so this file is sector-neutral.
+   ===================================================================== */
+
+.booking {
+  /* Fallbacks if a template doesn't set them */
+  --bk-bg: #fff;
+  --bk-text: #1d2330;
+  --bk-muted: #5c6473;
+  --bk-line: #dde1e7;
+  --bk-soft: #f2f3f5;
+  --bk-accent: #1d3a8a;
+  --bk-on-accent: #fff;
+  --bk-radius: 0.75rem;
+  --bk-heading-font: inherit;
+  --bk-error: #b42318;
+
+  width: min(28rem, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 0;
+  border-radius: var(--bk-radius);
+  background: var(--bk-bg);
+  color: var(--bk-text);
+  box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.45);
+  overflow: auto;
+}
+
+.booking::backdrop {
+  background: rgb(10 12 20 / 0.55);
+}
+
+.booking[open] {
+  animation: booking-in 0.2s ease-out;
+}
+
+@keyframes booking-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.booking__panel {
+  padding: 1.5rem;
+}
+
+.booking__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.booking__title {
+  font-family: var(--bk-heading-font);
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.booking__close {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: -0.35rem -0.5rem 0 0;
+  border-radius: 50%;
+  color: var(--bk-muted);
+}
+
+.booking__close:hover {
+  background: var(--bk-soft);
+  color: var(--bk-text);
+}
+
+.booking__close svg {
+  width: 1.2rem;
+}
+
+.booking__lead {
+  color: var(--bk-muted);
+  font-size: 0.92rem;
+}
+
+.booking__form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.booking__date {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.booking__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.booking__selected {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--bk-muted);
+}
+
+.booking__error {
+  margin-top: 0.4rem;
+  color: var(--bk-error);
+  font-size: 0.85rem;
+}
+
+.booking__hint {
+  margin-top: 0.4rem;
+  color: var(--bk-muted);
+  font-size: 0.8rem;
+}
+
+/* ---------- Calendar ---------- */
+.calendar {
+  max-width: 20rem;
+  margin-inline: auto;
+  padding: 0.75rem;
+  border: 1px solid var(--bk-line);
+  border-radius: min(var(--bk-radius), 0.75rem);
+}
+
+.calendar__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.calendar__title {
+  font-weight: 600;
+}
+
+.calendar__nav {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+}
+
+.calendar__nav svg {
+  width: 1.1rem;
+}
+
+.calendar__nav:hover:not(:disabled) {
+  background: var(--bk-soft);
+}
+
+.calendar__nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.calendar__weekdays,
+.calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+}
+
+.calendar__weekdays span {
+  padding-block: 0.3rem;
+  font-size: 0.72rem;
+  color: var(--bk-muted);
+}
+
+.calendar__day {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: min(var(--bk-radius), 50%);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.calendar__day:hover:not(:disabled) {
+  background: var(--bk-soft);
+}
+
+.calendar__day:disabled {
+  color: var(--bk-muted);
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.calendar__day.is-today {
+  box-shadow: inset 0 0 0 1px var(--bk-accent);
+}
+
+.calendar__day.is-selected,
+.calendar__day.is-selected:hover {
+  background: var(--bk-accent);
+  color: var(--bk-on-accent);
+  font-weight: 700;
+}
+
+/* ---------- Fields ---------- */
+.booking__stepper {
+  display: flex;
+  width: fit-content;
+  border: 1px solid var(--bk-line);
+  border-radius: min(var(--bk-radius), 0.6rem);
+  overflow: hidden;
+}
+
+.booking__step {
+  width: 2.75rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.booking__step:hover {
+  background: var(--bk-soft);
+}
+
+.booking__number {
+  width: 4rem;
+  padding: 0.6rem 0.25rem;
+  border: 0;
+  border-inline: 1px solid var(--bk-line);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  text-align: center;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.booking__number::-webkit-inner-spin-button,
+.booking__number::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.booking__select {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--bk-line);
+  border-radius: min(var(--bk-radius), 0.6rem);
+  background: var(--bk-bg);
+  color: var(--bk-text);
+  font: inherit;
+}
+
+.booking [aria-invalid="true"],
+.booking__stepper:has([aria-invalid="true"]) {
+  border-color: var(--bk-error);
+}
+
+.booking__primary {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: min(var(--bk-radius), 999px);
+  background: var(--bk-accent);
+  color: var(--bk-on-accent);
+  font-weight: 600;
+  text-align: center;
+}
+
+.booking__primary:hover {
+  filter: brightness(1.1);
+}
+
+/* ---------- Confirmation ---------- */
+.booking__done {
+  text-align: center;
+}
+
+.booking__check {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0.5rem auto 1.25rem;
+  color: var(--bk-accent);
+}
+
+.booking__check circle {
+  stroke-dasharray: 152;
+  stroke-dashoffset: 152;
+  animation: booking-draw 0.5s ease-out forwards;
+}
+
+.booking__check path {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: booking-draw 0.35s 0.4s ease-out forwards;
+}
+
+@keyframes booking-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.booking__done .booking__lead {
+  margin-top: 0.4rem;
+}
+
+.booking__summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1rem;
+  margin: 1.25rem 0 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: min(var(--bk-radius), 0.75rem);
+  background: var(--bk-soft);
+  text-align: left;
+}
+
+.booking__summary dt {
+  color: var(--bk-muted);
+}
+
+.booking__summary dd {
+  font-weight: 600;
+}
+
+.booking__note {
+  margin-bottom: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--bk-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking[open] {
+    animation: none;
+  }
+
+  .booking__check circle,
+  .booking__check path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}

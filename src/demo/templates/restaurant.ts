@@ -1,5 +1,21 @@
 import { el } from "../../utils/dom";
-import { ICONS, PLACEHOLDER, brandMark, companyName, copyright, icon, keysFor, type TemplateData } from "./shared";
+import { createBookingModal } from "../booking/bookingModal";
+import {
+  ICONS,
+  PLACEHOLDER,
+  action,
+  brandMark,
+  companyName,
+  copyright,
+  icon,
+  keysFor,
+  menuToggle,
+  mobileMenu,
+  navTo,
+  section,
+  wireInteractions,
+  type TemplateData,
+} from "./shared";
 
 const k = keysFor("restaurant");
 
@@ -8,25 +24,57 @@ const k = keysFor("restaurant");
  * Centred brand between split navigation, dark cellar-toned hero, short
  * philosophy statement, three "atmospheres" in alternating rows, chef quote,
  * opening hours + booking, centred footer.
+ * Every "Book a table" button opens the table-booking popup.
  * Styles: src/styles/templates/restaurant.css (class prefix "r-")
  */
 export function renderRestaurant(data: TemplateData): HTMLElement {
+  const booking = createBookingModal({
+    className: "r-modal",
+    title: k("modalTitle"),
+    lead: k("modalLead"),
+    closedWeekdays: [1, 2], // closed Monday and Tuesday, as in the opening hours
+    field: {
+      kind: "number",
+      label: k("guestsLabel"),
+      hint: k("guestsHint"),
+      error: k("guestsError"),
+      min: 1,
+      max: 20,
+      initial: 2,
+      decreaseLabel: k("guestsLess"),
+      increaseLabel: k("guestsMore"),
+    },
+    confirm: k("confirm"),
+    successTitle: k("successTitle"),
+    successText: k("successText"),
+  });
+
   const header = el("div", {
     className: "r-header",
+    attrs: { "data-header": "" },
     children: [
       el("span", {
         className: "r-nav r-nav--left",
-        children: [el("span", { text: k("navRestaurant") }), el("span", { text: k("navMenus") })],
+        attrs: { "data-nav": "" },
+        children: [navTo("restaurant", k("navRestaurant")), navTo("menus", k("navMenus"))],
       }),
       el("span", { className: "r-brand", children: [brandMark(data, "r-mark"), companyName(data.company)] }),
       el("span", {
         className: "r-nav r-nav--right",
+        attrs: { "data-nav": "" },
         children: [
-          el("span", { className: "r-nav__link", text: k("navChef") }),
-          el("span", { className: "r-nav__link", text: k("navVisit") }),
-          el("span", { className: "r-button r-button--outline", text: k("book") }),
+          navTo("chef", k("navChef"), "r-nav__link"),
+          navTo("visit", k("navVisit"), "r-nav__link"),
+          action("book", k("book"), "r-button r-button--outline"),
+          menuToggle(),
         ],
       }),
+      mobileMenu([
+        navTo("restaurant", k("navRestaurant")),
+        navTo("menus", k("navMenus")),
+        navTo("chef", k("navChef")),
+        navTo("visit", k("navVisit")),
+      ]),
     ],
   });
 
@@ -38,17 +86,20 @@ export function renderRestaurant(data: TemplateData): HTMLElement {
       el("div", {
         className: "r-hero__actions",
         children: [
-          el("span", { className: "r-button r-button--gold", text: k("book") }),
-          el("span", { className: "r-button r-button--ghost", text: k("heroMenus") }),
+          action("book", k("book"), "r-button r-button--gold"),
+          navTo("menus", k("heroMenus"), "r-button r-button--ghost"),
         ],
       }),
     ],
   });
 
-  const intro = el("div", {
-    className: "r-intro",
-    children: [icon(ICONS.sprig, "r-ornament"), el("p", { text: k("introText") })],
-  });
+  const intro = section(
+    el("div", {
+      className: "r-intro",
+      children: [icon(ICONS.sprig, "r-ornament"), el("p", { text: k("introText") })],
+    }),
+    "restaurant",
+  );
 
   const venues = (
     [
@@ -73,18 +124,24 @@ export function renderRestaurant(data: TemplateData): HTMLElement {
     }),
   );
 
-  const venuesSection = el("div", {
-    className: "r-section",
-    children: [el("h4", { className: "r-heading", text: k("venuesTitle") }), el("div", { className: "r-venues", children: venues })],
-  });
+  const venuesSection = section(
+    el("div", {
+      className: "r-section",
+      children: [el("h4", { className: "r-heading", text: k("venuesTitle") }), el("div", { className: "r-venues", children: venues })],
+    }),
+    "menus",
+  );
 
-  const quote = el("div", {
-    className: "r-quote",
-    children: [
-      el("blockquote", { children: [el("p", { text: k("chefQuote") })] }),
-      el("p", { className: "r-quote__role", text: k("chefRole") }),
-    ],
-  });
+  const quote = section(
+    el("div", {
+      className: "r-quote",
+      children: [
+        el("blockquote", { children: [el("p", { text: k("chefQuote") })] }),
+        el("p", { className: "r-quote__role", text: k("chefRole") }),
+      ],
+    }),
+    "chef",
+  );
 
   const hours = (
     [
@@ -94,23 +151,26 @@ export function renderRestaurant(data: TemplateData): HTMLElement {
     ] as const
   ).flatMap(([label, value]) => [el("dt", { text: k(label) }), el("dd", { text: k(value) })]);
 
-  const practical = el("div", {
-    className: "r-section r-practical",
-    children: [
-      el("div", {
-        children: [el("h4", { className: "r-heading r-heading--left", text: k("hoursTitle") }), el("dl", { className: "r-hours", children: hours })],
-      }),
-      el("div", {
-        className: "r-booking",
-        children: [
-          el("h5", { text: k("bookTitle") }),
-          el("p", { text: k("bookText") }),
-          el("p", { className: "r-booking__phone", children: [PLACEHOLDER.phone] }),
-          el("span", { className: "r-button r-button--gold", text: k("book") }),
-        ],
-      }),
-    ],
-  });
+  const practical = section(
+    el("div", {
+      className: "r-section r-practical",
+      children: [
+        el("div", {
+          children: [el("h4", { className: "r-heading r-heading--left", text: k("hoursTitle") }), el("dl", { className: "r-hours", children: hours })],
+        }),
+        el("div", {
+          className: "r-booking",
+          children: [
+            el("h5", { text: k("bookTitle") }),
+            el("p", { text: k("bookText") }),
+            el("p", { className: "r-booking__phone", children: [PLACEHOLDER.phone] }),
+            action("book", k("book"), "r-button r-button--gold"),
+          ],
+        }),
+      ],
+    }),
+    "visit",
+  );
 
   const footer = el("div", {
     className: "r-footer",
@@ -123,8 +183,10 @@ export function renderRestaurant(data: TemplateData): HTMLElement {
     ],
   });
 
-  return el("div", {
+  const root = el("div", {
     className: "tpl tpl-restaurant",
-    children: [header, hero, intro, venuesSection, quote, practical, footer],
+    children: [header, hero, intro, venuesSection, quote, practical, footer, booking.element],
   });
+  wireInteractions(root, { book: booking.open });
+  return root;
 }

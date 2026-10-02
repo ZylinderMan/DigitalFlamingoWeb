@@ -14,6 +14,7 @@ export interface TemplateData {
 /** Placeholder contact details shown in every template (change them here) */
 export const PLACEHOLDER = {
   phone: "01 23 45 67 89",
+  team: ["Claire Martin", "Julien Roux", "Sophie Bernard", "Marc Petit"],
   address: "12 rue de l'Exemple, 75001 Paris",
   email: (slug: string) => `contact@${slug}.fr`,
 };
@@ -108,3 +109,85 @@ export const ICONS = {
   opinion: `<svg ${SVG}><circle cx="18" cy="24" r="10"/><circle cx="30" cy="24" r="10"/></svg>`,
   practice: `<svg ${SVG}><rect x="8" y="8" width="32" height="32" rx="10"/><path d="M24 16v16M16 24h16"/></svg>`,
 };
+
+/* =====================================================================
+   NAVIGATION & ACTIONS inside a sample site
+   Buttons (not #links) so the real page's address bar keeps #demo-<sector>.
+   ===================================================================== */
+
+/** Marks an element as a scroll target: navTo("menus", …) scrolls to section(el, "menus") */
+export function section<T extends HTMLElement>(node: T, name: string): T {
+  node.dataset.section = name;
+  node.tabIndex = -1; // lets us move keyboard focus there after scrolling
+  return node;
+}
+
+/** A button that scrolls the sample site to one of its sections */
+export function navTo(target: string, text: TranslationKey, className = ""): HTMLButtonElement {
+  return el("button", { className, text, attrs: { type: "button", "data-target": target } });
+}
+
+/** A button that runs a named action registered in wireInteractions(), e.g. "book" */
+export function action(name: string, text: TranslationKey, className = ""): HTMLButtonElement {
+  return el("button", { className, text, attrs: { type: "button", "data-action": name } });
+}
+
+const MENU_ICON =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+
+/** ☰ button that opens the header menu on narrow screens (shown by each template's CSS) */
+export function menuToggle(): HTMLButtonElement {
+  const button = el("button", {
+    className: "tpl-menu-toggle",
+    attrs: { type: "button", "data-action": "menu", "aria-expanded": "false" },
+    textAttrs: { "aria-label": "mockup.menu" },
+  });
+  button.innerHTML = MENU_ICON;
+  return button;
+}
+
+/** The menu panel opened by menuToggle() */
+export function mobileMenu(items: HTMLElement[]): HTMLElement {
+  return el("div", { className: "tpl-mobile-menu", attrs: { "data-nav": "" }, children: items });
+}
+
+function setMenuOpen(header: HTMLElement, open: boolean): void {
+  header.dataset.menuOpen = String(open);
+  header.querySelector('[data-action="menu"]')?.setAttribute("aria-expanded", String(open));
+}
+
+function scrollToSection(root: HTMLElement, name: string): void {
+  const target = root.querySelector<HTMLElement>(`[data-section="${name}"]`);
+  if (!target) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  target.focus({ preventScroll: true });
+
+  // Highlight the matching menu item(s)
+  root.querySelectorAll<HTMLElement>("[data-nav] [data-target]").forEach((item) => {
+    item.classList.toggle("is-active", item.dataset.target === name);
+  });
+}
+
+/**
+ * One click handler for the whole sample site:
+ *   data-target="x"  → scroll to section(…, "x")
+ *   data-action="x"  → run actions.x()  ("menu" is built in)
+ * Headers that hold a menu toggle need the data-header attribute.
+ */
+export function wireInteractions(root: HTMLElement, actions: Record<string, () => void> = {}): void {
+  root.addEventListener("click", (event) => {
+    const trigger = (event.target as Element).closest<HTMLElement>("[data-target], [data-action]");
+    if (!trigger || !root.contains(trigger)) return;
+
+    const header = trigger.closest<HTMLElement>("[data-header]");
+    if (trigger.dataset.action === "menu") {
+      if (header) setMenuOpen(header, header.dataset.menuOpen !== "true");
+      return;
+    }
+    if (header) setMenuOpen(header, false);
+
+    if (trigger.dataset.target) scrollToSection(root, trigger.dataset.target);
+    else if (trigger.dataset.action) actions[trigger.dataset.action]?.();
+  });
+}

@@ -5,6 +5,7 @@ import "./styles/sections.css";
 import "./styles/footer.css";
 import "./styles/demo.css";
 import "./styles/mockup.css";
+import "./styles/booking.css";
 import "./styles/templates/building.css";
 import "./styles/templates/restaurant.css";
 import "./styles/templates/health.css";

@@ -102,6 +102,10 @@
   color: var(--h-muted);
 }
 
+.h-nav button:hover {
+  color: var(--h-teal);
+}
+
 .h-nav .is-active {
   color: var(--h-teal);
   font-weight: 600;
@@ -303,6 +307,42 @@
   font-size: 0.95rem;
 }
 
+/* Team */
+.h-team {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.h-member {
+  padding: 1.5rem 1rem;
+  border: 1px solid var(--h-line);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.h-member__avatar {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 0.9rem;
+  border-radius: 50%;
+  background: var(--h-mint);
+  color: var(--h-teal-dark);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.h-member__name {
+  font-weight: 600;
+}
+
+.h-member__role {
+  color: var(--h-muted);
+  font-size: 0.9rem;
+}
+
 /* Booking band */
 .h-booking {
   background: var(--h-teal);
@@ -375,6 +415,10 @@
     display: none;
   }
 
+  .h-team {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .h-hero__inner,
   .h-practice,
   .h-areas,
@@ -393,12 +437,29 @@
   .h-nav {
     display: none;
   }
+
+  .h-header .tpl-menu-toggle {
+    display: grid;
+  }
+}
+
+.h-header .tpl-menu-toggle,
+.h-header .tpl-mobile-menu {
+  color: var(--h-teal-dark);
+}
+
+.h-header[data-menu-open="true"] .tpl-mobile-menu {
+  display: flex;
 }
 
 /* Very long company names (over 34 characters) need the menu's space too */
 @container (max-width: 80rem) {
   .h-header__inner:has(.tpl-name--xl) .h-nav {
     display: none;
+  }
+
+  .h-header__inner:has(.tpl-name--xl) .tpl-menu-toggle {
+    display: grid;
   }
 }
 
@@ -410,4 +471,20 @@
   .h-topbar__inner {
     justify-content: flex-end;
   }
+}
+
+/* Booking popup colours (see src/styles/booking.css) */
+.h-modal {
+  --bk-bg: #fff;
+  --bk-text: var(--h-text);
+  --bk-muted: var(--h-muted);
+  --bk-line: var(--h-line);
+  --bk-soft: var(--h-mint);
+  --bk-accent: var(--h-teal);
+  --bk-on-accent: #fff;
+  --bk-radius: 1.1rem;
+}
+
+.h-modal .booking__title {
+  color: var(--h-teal-dark);
 }

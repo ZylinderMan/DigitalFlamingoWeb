@@ -1,5 +1,17 @@
 import { el } from "../../utils/dom";
-import { PLACEHOLDER, brandMark, companyName, copyright, keysFor, type TemplateData } from "./shared";
+import {
+  PLACEHOLDER,
+  brandMark,
+  companyName,
+  copyright,
+  keysFor,
+  menuToggle,
+  mobileMenu,
+  navTo,
+  section,
+  wireInteractions,
+  type TemplateData,
+} from "./shared";
 
 const k = keysFor("building");
 
@@ -26,24 +38,28 @@ export function renderBuilding(data: TemplateData): HTMLElement {
     ],
   });
 
+  // Menu items: section name → label (the same list feeds the desktop and phone menus)
+  const navItems = () => [
+    navTo("expertise", k("navExpertise")),
+    navTo("projects", k("navProjects")),
+    navTo("commitments", k("navCommitments")),
+    navTo("contact", k("navContact")),
+  ];
+  const desktopNav = el("span", { className: "b-nav", attrs: { "data-nav": "" }, children: navItems() });
+
   const header = el("div", {
     className: "b-header",
+    attrs: { "data-header": "" },
     children: [
       el("div", {
         className: "b-wrap b-header__inner",
         children: [
           el("span", { className: "b-brand", children: [brandMark(data, "b-mark"), companyName(data.company)] }),
-          el("span", {
-            className: "b-nav",
-            children: [
-              el("span", { className: "is-active", text: k("navExpertise") }),
-              el("span", { text: k("navProjects") }),
-              el("span", { text: k("navCommitments") }),
-              el("span", { text: k("navContact") }),
-            ],
-          }),
+          desktopNav,
+          menuToggle(),
         ],
       }),
+      el("div", { className: "b-wrap", children: [mobileMenu(navItems())] }),
     ],
   });
 
@@ -70,7 +86,7 @@ export function renderBuilding(data: TemplateData): HTMLElement {
     ],
   });
 
-  const intro = el("div", {
+  const intro = section(el("div", {
     className: "b-section",
     children: [
       el("div", {
@@ -94,7 +110,7 @@ export function renderBuilding(data: TemplateData): HTMLElement {
         ],
       }),
     ],
-  });
+  }), "expertise");
 
   const figures: Array<[string, Parameters<typeof k>[0]]> = [
     ["25", "figure1"],
@@ -113,7 +129,7 @@ export function renderBuilding(data: TemplateData): HTMLElement {
     ],
   });
 
-  const fields = el("div", {
+  const fields = section(el("div", {
     className: "b-section",
     children: [
       el("div", {
@@ -129,9 +145,9 @@ export function renderBuilding(data: TemplateData): HTMLElement {
         ],
       }),
     ],
-  });
+  }), "projects");
 
-  const steps = el("div", {
+  const steps = section(el("div", {
     className: "b-section b-section--grey",
     children: [
       el("div", {
@@ -153,22 +169,22 @@ export function renderBuilding(data: TemplateData): HTMLElement {
         ],
       }),
     ],
-  });
+  }), "commitments");
 
-  const cta = el("div", {
+  const cta = section(el("div", {
     className: "b-cta",
     children: [
       el("div", {
         className: "b-wrap b-cta__inner",
         children: [
           el("h4", { text: k("ctaTitle") }),
-          el("span", { className: "b-button b-button--light", text: k("ctaButton") }),
+          navTo("details", k("ctaButton"), "b-button b-button--light"),
         ],
       }),
     ],
-  });
+  }), "contact");
 
-  const footer = el("div", {
+  const footer = section(el("div", {
     className: "b-footer",
     children: [
       el("div", {
@@ -194,10 +210,12 @@ export function renderBuilding(data: TemplateData): HTMLElement {
       }),
       el("div", { className: "b-wrap", children: [copyright(data.company, "b-footer__copy")] }),
     ],
-  });
+  }), "details");
 
-  return el("div", {
+  const root = el("div", {
     className: "tpl tpl-building",
     children: [topbar, header, hero, intro, figuresBand, fields, steps, cta, footer],
   });
+  wireInteractions(root);
+  return root;
 }
